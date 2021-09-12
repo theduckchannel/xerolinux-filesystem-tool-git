@@ -1,0 +1,98 @@
+#!/usr/bin/env -S python
+import os
+import sys
+import subprocess as sp
+from qtpy.QtGui import *
+from qtpy.QtWidgets import *
+from qtpy.QtCore import *
+import qdarkstyle
+import psutil
+
+# Depends
+# python-pyqt5 python-qdarkstyle python-psutil
+
+# Current version
+current_version = '0.1.0'
+
+
+class Filesystem:
+
+    @staticmethod
+    def getFsType():
+        partitions = psutil.disk_partitions()
+        fstype = 'unknow'
+        for partition in partitions:
+            if partition.mountpoint == '/':
+                print(f'Found root partition and filesystem is: {partition.fstype}')
+                fstype = partition.fstype
+                break
+
+        return fstype
+
+    @staticmethod
+    def isSnapperPresent():
+        retValue = False
+        outputStatus = sp.getstatusoutput('which snapper')
+        if outputStatus == 0:
+            retValue = True
+
+        return retValue
+
+
+class Version:
+
+    @staticmethod
+    def getAppName():
+        return 'Xerolinux Filesystem Tool'
+
+    @staticmethod
+    def getVersion():
+        return current_version
+
+
+class mainWindow(QMainWindow):
+    app = QApplication(sys.argv)
+
+    def __init__(self):
+        super().__init__(parent=None)
+        self.app.setStyleSheet(qdarkstyle.load_stylesheet())
+        self.setWindowTitle(f'Xerolinux Rollback Utility v. {Version.getVersion()}')
+        self.setFixedSize(QSize(640, 480))
+        ############
+        # Title
+        self.setWindowTitle(f'{Version.getAppName()} v.{Version.getVersion()}')
+        self.setWindowIcon(QIcon('./images/xerolinux-icon.png'))
+        ###################################################
+        # Horizontal Default Layout ###
+        horizontalLayout = QHBoxLayout()
+        horizontalLayout.setAlignment(Qt.AlignTop)
+        ###
+        # Set the central widget of the Window.
+        centralWidget = QWidget()
+        centralWidget.setLayout(horizontalLayout)
+        self.setCentralWidget(centralWidget)
+        ############
+        # setup stylesheet
+        # the default system in qdarkstyle uses qtpy environment variable
+        self.show()
+        self.centerMe()
+        #####
+        Filesystem.isSnapperPresent()
+        ###
+        sys.exit(self.app.exec())
+
+    def centerMe(self):
+        qtRectangle = self.frameGeometry()
+        centerPoint = QDesktopWidget().availableGeometry().center()
+        qtRectangle.moveCenter(centerPoint)
+        self.move(qtRectangle.topLeft())
+
+    def exitApp(self):
+        self.app.quit()
+        sys.exit(0)
+
+
+if __name__ == '__main__':
+    os.environ['QT_LOGGING_RULES'] = "qt5ct.debug=false"
+    os.environ['QT_API'] = 'pyqt5'
+    window = mainWindow()

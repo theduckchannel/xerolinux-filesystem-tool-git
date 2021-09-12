@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Exec=/usr/bin/simple-powermenu
+Path=/usr/bin
+Comment=Simple Powermenu
+Icon=/usr/share/icons/hicolor/48x48/apps/simple-powermenu-icon.png
+Categories=System;
+Name=simple-powermenu
