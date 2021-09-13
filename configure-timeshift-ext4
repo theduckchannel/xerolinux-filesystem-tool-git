@@ -3,6 +3,10 @@
 echo "#####################################"
 echo "TimeShift For EXT4 User"
 echo "#####################################"
+echo "Update your System "
+echo "#################################"
+paru -Syyu
+echo
 echo
 echo "Installing Packages"
 echo "#####################################"
