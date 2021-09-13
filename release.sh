@@ -22,4 +22,4 @@ cd $CURRENT_DIR
 
 makepkg -si
 
-rm -rf {src,pkg}
+rm -rf {src,pkg,xerolinux-filesystem-tool-git*}
