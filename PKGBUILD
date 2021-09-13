@@ -13,19 +13,12 @@ conflicts=('xerolinux-filesystem-tool-git')
 source=(git+"$url.git")
 md5sums=('SKIP')
 
-pkgver() {
-	cd "$pkgname"
-	printf "%s" "$(git describe --abbrev=0)"
-}
-
-
 package() {
     cd "$pkgname"
-    install -Dm755  "xerolinux-filesystem-tool-git" -t "$pkgdir/usr/bin/"
-    install -Dm755  "rollback-frontend" -t "$pkgdir/usr/bin/"
-    install -Dm644  "images/xerolinux-logo.png" -t "$pkgdir/usr/share/$pkgname/images"
-    install -Dm644  "images/xerolinux-about.png" -t "$pkgdir/usr/share/$pkgname/images"
-    install -Dm644  "images/xerolinux-icon.png" -t "$pkgdir/usr/share/icons/hicolor/48x48/apps"
-    install -Dm644  "xerolinux-filesystem-tool-git.desktop" -t "$pkgdir/usr/share/applications/"
-    install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+    install -Dm755  "xerolinux-filesystem-tool" -t "$pkgdir/usr/bin/"
+    install -Dm644  "configure-snapper" -t "$pkgdir/usr/share/$pkgname/"
+    install -Dm644  "configure-timeshift-btrfs" -t "$pkgdir/usr/share/$pkgname/"
+    install -Dm644  "configure-timeshift-ext4" -t "$pkgdir/usr/share/$pkgname/"
+    install -Dm644  "images/xerolinux-filesystem-tool-icon.png" -t "$pkgdir/usr/share/icons/hicolor/48x48/apps"
+    install -Dm644  "xerolinux-filesystem-tool.desktop" -t "$pkgdir/usr/share/applications/"
 }
