@@ -10,18 +10,13 @@ echo "Old Version ====> $OLDVERSION"
 read -p "Enter with new version: " NEWVERSION
 sed -i "s/^current_version.*/current_version = '$NEWVERSION'/" $BINARY
 #####
-makepkg --printsrcinfo > .SRCINFO
 git add -A
 git commit -m "release $NEWVERSION"
+git tag -a $NEWVERSION -m "release $NEWVERSION"
 git push
 echo "Everything ok $NEWVERSION released!"
 echo "......."
 cd $CURRENT_DIR
-
-echo "Creating TAG [ $NEWVERSION ]"
-./update.sh
-git tag -a $NEWVERSION -m "release $NEWVERSION"
-git push origin $NEWVERSION
 
 
 makepkg -si
