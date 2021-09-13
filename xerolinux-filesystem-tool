@@ -64,13 +64,20 @@ class mainWindow(QMainWindow):
         self.setWindowIcon(QIcon('./images/xerolinux-icon.png'))
         ###################################################
         # Horizontal Default Layout ###
-        horizontalLayout = QHBoxLayout()
-        horizontalLayout.setAlignment(Qt.AlignTop)
+        verticalLayout = QHBoxLayout()
+        verticalLayout.setAlignment(Qt.AlignTop)
+        ####
+        # Message Label
+        messageLabel = QLabel()
+        verticalLayout.addWidget(messageLabel)
         ###
         # Set the central widget of the Window.
         centralWidget = QWidget()
-        centralWidget.setLayout(horizontalLayout)
+        centralWidget.setLayout(verticalLayout)
         self.setCentralWidget(centralWidget)
+        ###
+        self.getDirection()
+
         ############
         # setup stylesheet
         # the default system in qdarkstyle uses qtpy environment variable
@@ -80,6 +87,13 @@ class mainWindow(QMainWindow):
         Filesystem.isSnapperPresent()
         ###
         sys.exit(self.app.exec())
+
+    def getDirection(self):
+        if Filesystem.getFsType() == 'btrfs':
+            print('using btrfs')
+        else:
+            print('not using btrfs')
+
 
     def centerMe(self):
         qtRectangle = self.frameGeometry()
