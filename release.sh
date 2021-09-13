@@ -22,3 +22,8 @@ echo "Creating TAG [ $NEWVERSION ]"
 ./update.sh
 git tag -a $NEWVERSION -m "release $NEWVERSION"
 git push origin $NEWVERSION
+
+
+makepkg -si
+
+rm -rf {src,pkg}
