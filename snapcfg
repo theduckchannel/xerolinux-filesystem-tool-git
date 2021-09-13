@@ -6,7 +6,7 @@ echo "#################################"
 echo
 echo "Installing Packages"
 echo "#################################"
-paru -S btrfs-progs grub-btrfs snapper snapper-gui-git snap-pac-grub --noconfirm
+paru -S btrfs-progs grub-btrfs snapper snapper-gui-git snap-pac-grub xerolinux-rollback-git --noconfirm
 echo
 echo
 sleep 2
