@@ -38,6 +38,20 @@ class Filesystem:
         return retValue
 
     @staticmethod
+    def isSnapperPresentAndConfigured():
+        retValue = False
+        outputStatus = sp.getstatusoutput('which snapper')
+        if outputStatus[0] == 0:
+            # verifify if config ok
+            outputStatus = sp.getstatusoutput('snapper list')
+            if outputStatus[0] == 0:
+                retValue = True
+
+
+        return retValue
+
+
+    @staticmethod
     def isTimeshiftPresent():
         retValue = False
         outputStatus = sp.getstatusoutput('which timeshift')
@@ -107,7 +121,7 @@ class mainWindow(QMainWindow):
         self.messageLabel.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
         self.messageLabel.setText(f':: You are using {Filesystem.getFsType()} filestystem ::')
         if Filesystem.getFsType() == 'btrfs':
-            if Filesystem.isSnapperPresent():
+            if Filesystem.isSnapperPresentAndConfigured():
                 self.xerolinuxRollbackPushButton.clicked.connect(self.xerolinuxRollbackClick)
                 self.verticalLayout.addWidget(self.xerolinuxRollbackPushButton)
             else:
