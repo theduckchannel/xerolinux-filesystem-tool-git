@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Exec=/usr/bin/simple-powermenu
+Exec=/usr/bin/xerolinux-filesystem-tool
 Path=/usr/bin
 Comment=Simple Powermenu
 Icon=/usr/share/icons/hicolor/48x48/apps/simple-powermenu-icon.png

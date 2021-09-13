@@ -62,10 +62,12 @@ class mainWindow(QMainWindow):
     app = QApplication(sys.argv)
     verticalLayout = QVBoxLayout()
     messageLabel = QLabel()
-    runConfigureSnapperPushButton = QPushButton('Configure Snapper')
-    runConfigureTimeshiftPushButton = QPushButton('Configure Timeshift')
-    runXerolinuxRollbackPushButton = QPushButton('run Xerolinux Rollback Tool')
-    runTimeshiftPushButton = QPushButton('run Timeshift')
+    configSnapperBtrfsPushButton = QPushButton('Configure Snapper')
+    configTimeshiftBtrfsPushButton = QPushButton('Configure Timeshift btrfs')
+    configTimeshiftExt4PushButton = QPushButton('Configure Timeshift ext4')
+    xerolinuxRollbackPushButton = QPushButton('run Xerolinux Rollback Tool')
+    timeshiftPushButton = QPushButton('run Timeshift')
+    exitPushButton = QPushButton('E&xit')
 
 
     def __init__(self):
@@ -102,43 +104,52 @@ class mainWindow(QMainWindow):
 
     def initUI(self):
         self.messageLabel.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-        self.messageLabel.setText(f'You are using {Filesystem.getFsType()} filestystem.')
+        self.messageLabel.setText(f':: You are using {Filesystem.getFsType()} filestystem ::')
         if Filesystem.getFsType() == 'btrfs':
             if Filesystem.isSnapperPresent():
-                self.runXerolinuxRollbackPushButton.clicked.connect(self.xerolinuxRollbackClick)
-                self.verticalLayout.addWidget(self.runXerolinuxRollbackPushButton)
+                self.xerolinuxRollbackPushButton.clicked.connect(self.xerolinuxRollbackClick)
+                self.verticalLayout.addWidget(self.xerolinuxRollbackPushButton)
             else:
-                self.verticalLayout.addWidget(self.runConfigureSnapperPushButton)
+                self.verticalLayout.addWidget(self.configSnapperBtrfsPushButton)
+                self.configSnapperBtrfsPushButton.clicked.connect(self.configSnapperClick)
+                self.verticalLayout.addWidget(self.configTimeshiftBtrfsPushButton)
+                self.configTimeshiftBtrfsPushButton.clicked.connect(self.configTimeshiftBtrfsClick)
         else:
-            print('filesystem is ext4')
             if Filesystem.isTimeshiftPresent():
-                self.verticalLayout.addWidget(self.runTimeshiftPushButton)
+                self.verticalLayout.addWidget(self.timeshiftPushButton)
+                self.timeshiftPushButton.clicked.connect(self.timeshiftClick)
             else:
-                self.verticalLayout.addWidget(self.runConfigureTimeshiftPushButton)
+                self.verticalLayout.addWidget(self.configTimeshiftExt4PushButton)
+                self.configTimeshiftExt4PushButton.clicked.connect(self.configTimeshiftExt4Click)
+
+
+        self.verticalLayout.addWidget(self.exitPushButton)
+        self.exitPushButton.clicked.connect(self.exitApp)
+
 
     @staticmethod
     def xerolinuxRollbackClick():
-        sp.getoutput('xerolinux-rollback')
+        sp.getoutput('/usr/bin/xerolinux-rollback')
 
 
     @staticmethod
-    def configureSnapperClick():
+    def configSnapperClick():
         sp.getoutput('konsole --hide-menubar --hide-tabbar -e /usr/local/share/xerolinux-filesystem-tool-git/configure-snapper')
 
 
     @staticmethod
-    def configureTimeshiftBtrfsClick()
-        sp.getoutput('ls -la')
-
-
-    @staticmethod
-    def runTimeshiftClick():
+    def timeshiftClick():
         sp.getoutput('timeshift')
 
 
     @staticmethod
-    def configureTimeshiftClick():
-        sp.getoutput('')
+    def configTimeshiftBtrfsClick():
+        sp.getoutput('konsole --hide-menubar --hide-tabbar -e /usr/local/share/xerolinux-filesystem-tool-git/configure-timeshift-btrfs')
+
+
+    @staticmethod
+    def configTimeshiftExt4Click():
+        sp.getoutput('konsole --hide-menubar --hide-tabbar -e /usr/local/share/xerolinux-filesystem-tool-git/configure-timeshift-ext4')
 
 
 
