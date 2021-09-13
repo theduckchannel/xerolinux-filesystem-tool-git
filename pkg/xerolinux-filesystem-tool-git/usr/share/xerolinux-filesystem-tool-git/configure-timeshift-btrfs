@@ -1,0 +1,27 @@
+#!/bin/bash
+#set -e
+echo "Update your System "
+echo "#################################"
+paru -Syyu
+echo
+echo
+echo "#####################################"
+echo "TimeShift with Sutosnap & Grub -BTRFS"
+echo "#####################################"
+echo
+echo "Installing Packages"
+echo "#####################################"
+sudo pacman -S grub-btrfs timeshift timeshift-autosnap -noconfirm
+echo
+echo "Enabling Grub-BTRFS Services"
+echo "#####################################"
+sudo systemctl enable --now grub-btrfs.path
+echo
+echo "#####################################"
+echo "Done ! "
+echo "#####################################"
+echo
+echo "Rebooting To Activate ! "
+echo "#####################################"
+sleep 2
+sudo reboot
