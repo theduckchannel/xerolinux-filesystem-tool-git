@@ -16,9 +16,9 @@ md5sums=('SKIP')
 package() {
     cd "$pkgname"
     install -Dm755  "xerolinux-filesystem-tool" -t "$pkgdir/usr/bin/"
-    install -Dm644  "configure-snapper" -t "$pkgdir/usr/share/$pkgname/"
-    install -Dm644  "configure-timeshift-btrfs" -t "$pkgdir/usr/share/$pkgname/"
-    install -Dm644  "configure-timeshift-ext4" -t "$pkgdir/usr/share/$pkgname/"
+    install -Dm755  "configure-snapper" -t "$pkgdir/usr/share/$pkgname/"
+    install -Dm755  "configure-timeshift-btrfs" -t "$pkgdir/usr/share/$pkgname/"
+    install -Dm755  "configure-timeshift-ext4" -t "$pkgdir/usr/share/$pkgname/"
     install -Dm644  "images/xerolinux-filesystem-tool-icon.png" -t "$pkgdir/usr/share/icons/hicolor/48x48/apps"
     install -Dm644  "xerolinux-filesystem-tool.desktop" -t "$pkgdir/usr/share/applications/"
 }
