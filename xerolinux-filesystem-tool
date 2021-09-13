@@ -23,7 +23,6 @@ class Filesystem:
         fstype = 'unknow'
         for partition in partitions:
             if partition.mountpoint == '/':
-                print(f'Found root partition and filesystem is: {partition.fstype}')
                 fstype = partition.fstype
                 break
 
@@ -33,6 +32,16 @@ class Filesystem:
     def isSnapperPresent():
         retValue = False
         outputStatus = sp.getstatusoutput('which snapper')
+        print(f'output: {outputStatus}')
+        if outputStatus == 0:
+            retValue = True
+
+        return retValue
+
+    @staticmethod
+    def isTimeshiftPresent():
+        retValue = False
+        outputStatus = sp.getstatusoutput('which timeshift')
         if outputStatus == 0:
             retValue = True
 
@@ -52,6 +61,8 @@ class Version:
 
 class mainWindow(QMainWindow):
     app = QApplication(sys.argv)
+    messageLabel = QLabel()
+
 
     def __init__(self):
         super().__init__(parent=None)
@@ -68,31 +79,33 @@ class mainWindow(QMainWindow):
         verticalLayout.setAlignment(Qt.AlignTop)
         ####
         # Message Label
-        messageLabel = QLabel()
-        verticalLayout.addWidget(messageLabel)
+        verticalLayout.addWidget(self.messageLabel)
         ###
         # Set the central widget of the Window.
         centralWidget = QWidget()
         centralWidget.setLayout(verticalLayout)
         self.setCentralWidget(centralWidget)
         ###
-        self.getDirection()
-
+        # Setup UI
+        self.initUI()
         ############
         # setup stylesheet
         # the default system in qdarkstyle uses qtpy environment variable
         self.show()
         self.centerMe()
         #####
-        Filesystem.isSnapperPresent()
-        ###
         sys.exit(self.app.exec())
 
-    def getDirection(self):
+
+    def initUI(self):
+        self.messageLabel.setText(f'You are using {Filesystem.getFsType()} filestystem.')
         if Filesystem.getFsType() == 'btrfs':
-            print('using btrfs')
+            if Filesystem.isSnapperPresent():
+                print('show xerolinux-rollback')
+            else:
+                print('Snapper NOT present')
         else:
-            print('not using btrfs')
+            print('filesystem is ext4')
 
 
     def centerMe(self):
