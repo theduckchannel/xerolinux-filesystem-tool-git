@@ -1,5 +1,5 @@
 pkgname=xerolinux-filesystem-tool-git
-pkgver='0.1.3'
+pkgver=0.1.4
 pkgrel=0
 pkgdesc='Xerolinux Fylesystem Configuration Tool'
 arch=('any')
