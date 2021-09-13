@@ -5,4 +5,4 @@ Path=/usr/bin
 Comment=Simple Powermenu
 Icon=/usr/share/icons/hicolor/48x48/apps/xerolinux-filesystem-tool-icon.png
 Categories=System;
-Name=simple-powermenu
+Name=xerlinux-filesystem-tool
