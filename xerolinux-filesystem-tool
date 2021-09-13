@@ -12,7 +12,7 @@ import psutil
 # python-pyqt5 python-qdarkstyle python-psutil
 
 # Current version
-current_version = '0.1.12'
+current_version = '0.1.14'
 
 
 class Filesystem:
@@ -75,11 +75,11 @@ class mainWindow(QMainWindow):
         self.app.setStyleSheet(qdarkstyle.load_stylesheet())
         self.setWindowTitle(f'Xerolinux Rollback Utility v. {Version.getVersion()}')
         # self.setFixedSize(QSize(640, 480))
-        self.setFixedWidth(300)
+        self.setFixedWidth(640)
         ############
         # Title
         self.setWindowTitle(f'{Version.getAppName()} v.{Version.getVersion()}')
-        self.setWindowIcon(QIcon('./images/xerolinux-icon.png'))
+        self.setWindowIcon(QIcon('/usr/share/icons/hicolor/48x48/apps/xerolinux-filesystem-tool-icon.png'))
         ###################################################
         # Vertical Default Layout ###
         self.verticalLayout.setAlignment(Qt.AlignTop)
