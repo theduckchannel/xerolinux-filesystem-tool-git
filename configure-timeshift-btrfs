@@ -1,5 +1,10 @@
 #!/bin/bash
 #set -e
+echo "Update your System "
+echo "#################################"
+paru -Syyu
+echo
+echo
 echo "#####################################"
 echo "TimeShift with Sutosnap & Grub -BTRFS"
 echo "#####################################"
