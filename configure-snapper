@@ -3,6 +3,12 @@
 echo "#################################"
 echo "Configuring Snapper "
 echo "#################################"
+echo "Update your System "
+echo "#################################"
+paru -S btrfs-progs grub-btrfs snapper snapper-gui-git snap-pac-grub xerolinux-rollback-git --noconfirm
+echo
+echo
+sleep 2
 echo
 echo "Installing Packages"
 echo "#################################"
