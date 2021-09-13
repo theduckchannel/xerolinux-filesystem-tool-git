@@ -32,8 +32,7 @@ class Filesystem:
     def isSnapperPresent():
         retValue = False
         outputStatus = sp.getstatusoutput('which snapper')
-        print(f'output: {outputStatus}')
-        if outputStatus == 0:
+        if outputStatus[0] == 0:
             retValue = True
 
         return retValue
@@ -42,7 +41,7 @@ class Filesystem:
     def isTimeshiftPresent():
         retValue = False
         outputStatus = sp.getstatusoutput('which timeshift')
-        if outputStatus == 0:
+        if outputStatus[0] == 0:
             retValue = True
 
         return retValue
@@ -61,7 +60,12 @@ class Version:
 
 class mainWindow(QMainWindow):
     app = QApplication(sys.argv)
+    verticalLayout = QVBoxLayout()
     messageLabel = QLabel()
+    runConfigureSnapperPushButton = QPushButton('Configure Snapper')
+    runConfigureTimeshiftPushButton = QPushButton('Configure Timeshift')
+    runXerolinuxRollbackPushButton = QPushButton('run Xerolinux Rollback Tool')
+    runTimeshiftPushButton = QPushButton('run Timeshift')
 
 
     def __init__(self):
@@ -74,16 +78,15 @@ class mainWindow(QMainWindow):
         self.setWindowTitle(f'{Version.getAppName()} v.{Version.getVersion()}')
         self.setWindowIcon(QIcon('./images/xerolinux-icon.png'))
         ###################################################
-        # Horizontal Default Layout ###
-        verticalLayout = QHBoxLayout()
-        verticalLayout.setAlignment(Qt.AlignTop)
+        # Vertical Default Layout ###
+        self.verticalLayout.setAlignment(Qt.AlignTop)
         ####
         # Message Label
-        verticalLayout.addWidget(self.messageLabel)
+        self.verticalLayout.addWidget(self.messageLabel)
         ###
         # Set the central widget of the Window.
         centralWidget = QWidget()
-        centralWidget.setLayout(verticalLayout)
+        centralWidget.setLayout(self.verticalLayout)
         self.setCentralWidget(centralWidget)
         ###
         # Setup UI
@@ -98,14 +101,42 @@ class mainWindow(QMainWindow):
 
 
     def initUI(self):
+        self.messageLabel.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
         self.messageLabel.setText(f'You are using {Filesystem.getFsType()} filestystem.')
         if Filesystem.getFsType() == 'btrfs':
             if Filesystem.isSnapperPresent():
-                print('show xerolinux-rollback')
+                self.runXerolinuxRollbackPushButton.clicked.connect(self.xerolinuxRollbackClick)
+                self.verticalLayout.addWidget(self.runXerolinuxRollbackPushButton)
             else:
                 print('Snapper NOT present')
+                self.verticalLayout.addWidget(self.runConfigureSnapperPushButton)
         else:
             print('filesystem is ext4')
+            if Filesystem.isTimeshiftPresent():
+                self.verticalLayout.addWidget(self.runTimeshiftPushButton)
+            else:
+                self.verticalLayout.addWidget(self.runConfigureTimeshiftPushButton)
+
+    @staticmethod
+    def xerolinuxRollbackClick():
+        sp.getoutput('xerolinux-rollback')
+
+
+    @staticmethod
+    def configureSnapperClick():
+        sp.getoutput('konsole --hide-menubar --hide-tabbar -e /usr/bin/configure-snapper')
+
+
+
+    @staticmethod
+    def runTimeshiftClick():
+        sp.getoutput('timeshift')
+
+
+    @staticmethod
+    def configureTimeshiftClick():
+        sp.getoutput('')
+
 
 
     def centerMe(self):

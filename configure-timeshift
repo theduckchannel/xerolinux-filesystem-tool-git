@@ -1,0 +1,14 @@
+#!/bin/bash
+#set -e
+echo "#####################################"
+echo "TimeShift For EXT4 User"
+echo "#####################################"
+echo
+echo "Installing Packages"
+echo "#####################################"
+sudo pacman -S timeshift --noconfirm
+echo
+echo "#####################################"
+echo "Done ! "
+echo "#####################################"
+Sleep 3
