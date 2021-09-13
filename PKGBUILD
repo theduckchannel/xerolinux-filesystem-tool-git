@@ -1,11 +1,11 @@
 pkgname=xerolinux-filesystem-tool-git
-pkgver=0.1.14
+pkgver=0.1.15
 pkgrel=0
 pkgdesc='Xerolinux Fylesystem Configuration Tool'
 arch=('any')
 license=('GPL3')
 url='https://github.com/theduckchannel/xerolinux-filesystem-tool-git'
-depends=('coreutils' 'python')
+depends=('coreutils' 'python' 'python-pyqt5' 'python-qdarkstyle' 'python-psutil' 'xerolinux-rollback-git')
 optdepends=()
 makedepends=('git')
 provides=('xerolinux-filesystem-tool-git')

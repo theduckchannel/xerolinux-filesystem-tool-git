@@ -20,6 +20,5 @@ echo "......."
 cd $CURRENT_DIR
 
 
-makepkg -si
+./install.sh
 
-rm -rf {src,pkg,xerolinux-filesystem-tool-git*}

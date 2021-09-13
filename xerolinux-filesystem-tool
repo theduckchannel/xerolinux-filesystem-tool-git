@@ -12,7 +12,7 @@ import psutil
 # python-pyqt5 python-qdarkstyle python-psutil
 
 # Current version
-current_version = '0.1.14'
+current_version = '0.1.15'
 
 
 class Filesystem:
