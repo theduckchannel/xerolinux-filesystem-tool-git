@@ -108,7 +108,6 @@ class mainWindow(QMainWindow):
                 self.runXerolinuxRollbackPushButton.clicked.connect(self.xerolinuxRollbackClick)
                 self.verticalLayout.addWidget(self.runXerolinuxRollbackPushButton)
             else:
-                print('Snapper NOT present')
                 self.verticalLayout.addWidget(self.runConfigureSnapperPushButton)
         else:
             print('filesystem is ext4')
@@ -124,8 +123,12 @@ class mainWindow(QMainWindow):
 
     @staticmethod
     def configureSnapperClick():
-        sp.getoutput('konsole --hide-menubar --hide-tabbar -e /usr/bin/configure-snapper')
+        sp.getoutput('konsole --hide-menubar --hide-tabbar -e /usr/local/share/xerolinux-filesystem-tool-git/configure-snapper')
 
+
+    @staticmethod
+    def configureTimeshiftBtrfsClick()
+        sp.getoutput('ls -la')
 
 
     @staticmethod
