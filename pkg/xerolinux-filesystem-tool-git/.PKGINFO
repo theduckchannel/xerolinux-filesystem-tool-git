@@ -2,10 +2,10 @@
 # using fakeroot version 1.25.3
 pkgname = xerolinux-filesystem-tool-git
 pkgbase = xerolinux-filesystem-tool-git
-pkgver = 0.1.16-0
+pkgver = 0.1.18-0
 pkgdesc = Xerolinux Fylesystem Configuration Tool
 url = https://github.com/theduckchannel/xerolinux-filesystem-tool-git
-builddate = 1631572719
+builddate = 1631572875
 packager = Unknown Packager
 size = 24367
 arch = any
