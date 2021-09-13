@@ -12,7 +12,7 @@ import psutil
 # python-pyqt5 python-qdarkstyle python-psutil
 
 # Current version
-current_version = '0.1.10'
+current_version = '0.1.12'
 
 
 class Filesystem:
@@ -74,7 +74,8 @@ class mainWindow(QMainWindow):
         super().__init__(parent=None)
         self.app.setStyleSheet(qdarkstyle.load_stylesheet())
         self.setWindowTitle(f'Xerolinux Rollback Utility v. {Version.getVersion()}')
-        self.setFixedSize(QSize(640, 480))
+        # self.setFixedSize(QSize(640, 480))
+        self.setFixedWidth(300)
         ############
         # Title
         self.setWindowTitle(f'{Version.getAppName()} v.{Version.getVersion()}')
