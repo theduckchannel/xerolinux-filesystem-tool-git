@@ -10,9 +10,10 @@ echo
 echo
 echo "Installing Packages"
 echo "#####################################"
-sudo pacman -S timeshift --noconfirm
+paru --noconfirm -S timeshift
 echo
 echo "#####################################"
-echo "Done ! "
+echo "Done Rebooting! "
 echo "#####################################"
 Sleep 3
+reboot

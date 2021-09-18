@@ -12,7 +12,7 @@ import psutil
 # python-pyqt5 python-qdarkstyle python-psutil
 
 # Current version
-current_version = '0.1.24'
+current_version = '0.1.26'
 
 
 class Filesystem:
@@ -124,7 +124,12 @@ class mainWindow(QMainWindow):
             if Filesystem.isSnapperPresentAndConfigured():
                 self.xerolinuxRollbackPushButton.clicked.connect(self.xerolinuxRollbackClick)
                 self.verticalLayout.addWidget(self.xerolinuxRollbackPushButton)
-            else:
+
+            if Filesystem.isTimeshiftPresent():
+                self.verticalLayout.addWidget(self.timeshiftPushButton)
+                self.timeshiftPushButton.clicked.connect(self.timeshiftClick)
+
+            if (not Filesystem.isTimeshiftPresent()) and (not Filesystem.isSnapperPresentAndConfigured()):
                 self.verticalLayout.addWidget(self.configSnapperBtrfsPushButton)
                 self.configSnapperBtrfsPushButton.clicked.connect(self.configSnapperClick)
                 self.verticalLayout.addWidget(self.configTimeshiftBtrfsPushButton)
