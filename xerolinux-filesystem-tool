@@ -12,7 +12,7 @@ import psutil
 # python-pyqt5 python-qdarkstyle python-psutil
 
 # Current version
-current_version = '0.1.26'
+current_version = '0.1.32'
 
 
 class Filesystem:
@@ -147,30 +147,25 @@ class mainWindow(QMainWindow):
         self.exitPushButton.clicked.connect(self.exitApp)
 
 
-    @staticmethod
-    def xerolinuxRollbackClick():
+    def xerolinuxRollbackClick(self):
         sp.getoutput('/usr/bin/xerolinux-rollback')
         self.exitApp()
 
 
-    @staticmethod
-    def configSnapperClick():
+    def configSnapperClick(self):
         sp.getoutput('konsole --hide-menubar --hide-tabbar -e /usr/share/xerolinux-filesystem-tool-git/configure-snapper')
         self.exitApp()
 
 
-    @staticmethod
-    def timeshiftClick():
+    def timeshiftClick(self):
         sp.getoutput('konsole --hide-menubar --hide-tabbar -e sudo timeshift-gtk')
         self.exitApp()
 
-    @staticmethod
-    def configTimeshiftBtrfsClick():
+    def configTimeshiftBtrfsClick(self):
         sp.getoutput('konsole --hide-menubar --hide-tabbar -e /usr/share/xerolinux-filesystem-tool-git/configure-timeshift-btrfs')
         self.exitApp()
 
-    @staticmethod
-    def configTimeshiftExt4Click():
+    def configTimeshiftExt4Click(self):
         sp.getoutput('konsole --hide-menubar --hide-tabbar -e /usr/share/xerolinux-filesystem-tool-git/configure-timeshift-ext4')
         self.exitApp()
 
