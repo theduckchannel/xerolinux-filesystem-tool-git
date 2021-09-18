@@ -11,7 +11,7 @@ echo "#####################################"
 echo
 echo "Installing Packages"
 echo "#####################################"
-sudo pacman -S grub-btrfs timeshift timeshift-autosnap -noconfirm
+paru --noconfirm -S grub-btrfs timeshift timeshift-autosnap
 echo
 echo "Enabling Grub-BTRFS Services"
 echo "#####################################"
